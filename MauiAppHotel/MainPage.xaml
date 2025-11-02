@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    x:Class="MauiAppHotel.MainPage"
+    Title="Refúgio dos Pássaros"
+    BackgroundColor="{StaticResource BgBege}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="18">
+
+            <!-- (Opcional) Hero: coloque 'hero_nature.png' em Resources/Images -->
+            <!-- Remova este Frame inteiro se não tiver imagem ainda -->
+            <Frame Padding="0"
+                   HasShadow="False"
+                   BackgroundColor="{StaticResource Branco}"
+                   BorderColor="{StaticResource BordaSuave}"
+                   CornerRadius="14">
+                <Image Source="hero_nature.png"
+                       Aspect="AspectFill"
+                       HeightRequest="160" />
+            </Frame>
+
+            <!-- Cabeçalho clean -->
+            <Label Text="Refúgio dos Pássaros"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource VerdePrimario}"
+                   HorizontalOptions="Center" />
+
+            <Label Text="Faça sua reserva e venha descansar em meio à natureza."
+                   FontSize="18"
+                   TextColor="{StaticResource CinzaTexto}"
+                   HorizontalOptions="Center" />
+
+            <!-- Card do formulário -->
+            <Frame Padding="20"
+                   CornerRadius="14"
+                   BackgroundColor="{StaticResource Branco}"
+                   BorderColor="{StaticResource BordaSuave}"
+                   HasShadow="True"
+                   Margin="0,12">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <!-- Datas -->
+                    <Label Text="Check-in"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource CinzaTexto}" />
+                    <DatePicker x:Name="CheckIn"
+                                Date="{x:Static sys:DateTime.Today}"
+                                MinimumDate="{x:Static sys:DateTime.Today}"
+                                Format="dd/MM/yyyy" />
+
+                    <Label Text="Check-out"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource CinzaTexto}" />
+                    <DatePicker x:Name="CheckOut"
+                                Date="{x:Static sys:DateTime.Today}"
+                                MinimumDate="{Binding Source={x:Reference CheckIn}, Path=Date}"
+                                Format="dd/MM/yyyy" />
+
+                    <!-- Hóspedes -->
+                    <Label Text="Hóspedes"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource VerdePrimario}" />
+                    <Label Text="(máx. 6 no total)"
+                           FontSize="12"
+                           TextColor="{StaticResource CinzaTexto}" />
+
+                    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto"
+                          ColumnSpacing="12" RowSpacing="8">
+
+                        <!-- Adultos -->
+                        <Label Grid.Row="0" Grid.Column="0"
+                               Text="Adultos"
+                               VerticalTextAlignment="Center" />
+                        <HorizontalStackLayout Grid.Row="0" Grid.Column="1"
+                                               Spacing="10" VerticalOptions="Center">
+                            <Stepper x:Name="AdultsStepper"
+                                     Minimum="1" Maximum="6" Increment="1" Value="1"
+                                     ValueChanged="OnGuestStepperChanged" />
+                            <Label Text="{Binding Source={x:Reference AdultsStepper}, Path=Value, StringFormat='{0}'}"
+                                   VerticalTextAlignment="Center" />
+                        </HorizontalStackLayout>
+
+                        <!-- Crianças -->
+                        <Label Grid.Row="1" Grid.Column="0"
+                               Text="Crianças"
+                               VerticalTextAlignment="Center" />
+                        <HorizontalStackLayout Grid.Row="1" Grid.Column="1"
+                                               Spacing="10" VerticalOptions="Center">
+                            <Stepper x:Name="ChildrenStepper"
+                                     Minimum="0" Maximum="6" Increment="1" Value="0"
+                                     ValueChanged="OnGuestStepperChanged" />
+                            <Label Text="{Binding Source={x:Reference ChildrenStepper}, Path=Value, StringFormat='{0}'}"
+                                   VerticalTextAlignment="Center" />
+                        </HorizontalStackLayout>
+                    </Grid>
+
+                    <Label x:Name="GuestsSummaryLabel"
+                           Text="Total de hóspedes: 1 (Adultos: 1, Crianças: 0)"
+                           TextColor="{StaticResource CinzaTexto}" />
+
+                    <!-- Tipo de quarto -->
+                    <Label Text="Tipo de quarto"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource VerdePrimario}" />
+
+                    <Frame BorderColor="{StaticResource BordaSuave}"
+                           CornerRadius="8" Padding="4"
+                           BackgroundColor="{StaticResource Branco}">
+                        <Picker x:Name="RoomTypePicker"
+                                Title="Escolha o tipo de quarto"
+                                SelectedIndexChanged="OnRoomTypeChanged">
+                            <Picker.Items>
+                                <x:String>Standard</x:String>
+                                <x:String>Superior</x:String>
+                                <x:String>Deluxe</x:String>
+                                <x:String>Suíte</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </Frame>
+
+                    <Label x:Name="RoomTypeLabel"
+                           Text="Nenhum tipo selecionado"
+                           TextColor="{StaticResource CinzaTexto}" />
+
+                    <!-- Ações -->
+                    <Button Text="Confirmar reserva"
+                            BackgroundColor="{StaticResource VerdePrimario}"
+                            TextColor="White"
+                            CornerRadius="10"
+                            HeightRequest="48"
+                            FontAttributes="Bold" />
+
+                    <Button Text="Ir para Sobre"
+                            Clicked="OnSobreClicked"
+                            BackgroundColor="{StaticResource VerdeClaro}"
+                            TextColor="#10331A"
+                            CornerRadius="10"
+                            HeightRequest="44" />
+
+                    <!-- Mantido do template (se ainda usa OnCounterClicked) -->
+                    <Button x:Name="CounterBtn"
+                            Text="Click me"
+                            Clicked="OnCounterClicked"
+                            HorizontalOptions="Fill" />
+
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
