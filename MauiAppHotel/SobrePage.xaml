@@ -6,7 +6,7 @@
     Title="Sobre">
 
     <VerticalStackLayout Padding="24" Spacing="10">
-        <Label Text="Aplicativo: App Hotel (.NET MAUI)" FontAttributes="Bold" FontSize="18" />
+        <Label Text="Aplicativo: App Hotel Refúgio dos Passaros" FontAttributes="Bold" FontSize="18" />
         <Label Text="Desenvolvedora: Daniela Silva (Shu)" />
         <Label Text="Ano de desenvolvimento: 2025" />
         <Label Text="Versão do app: 1.0.0" />

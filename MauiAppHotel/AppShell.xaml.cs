@@ -1,5 +1,5 @@
-﻿using Microsoft.Maui.Controls;
-using MauiAppHotel;   // garante acesso ao namespace do projeto
+﻿using System;
+using Microsoft.Maui.Controls;
 
 namespace MauiAppHotel
 {
@@ -9,8 +9,14 @@ namespace MauiAppHotel
         {
             InitializeComponent();
 
-            // registra rota para a tela Sobre
+            // Registra a rota para navegação por código (GoToAsync)
             Routing.RegisterRoute(nameof(SobrePage), typeof(SobrePage));
+        }
+
+        // Handler do MenuItem "Sobre" no XAML
+        private async void OnSobreClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(SobrePage));
         }
     }
 }
